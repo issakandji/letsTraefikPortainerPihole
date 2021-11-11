@@ -1,0 +1,13 @@
+## Ansible configuration for connecting to remote host
+# IP address
+ansible_host: "{{ vault_pibackup_ip }}"
+# User
+host_user: "{{ vault_pibackup_user }}"
+# User password
+host_password: "{{ vault_pibackup_pass }}"
+# Admin User
+host_admin_user: "{{ vault_pibackup_admin_user }}"
+# Admin password
+host_admin_password: "{{ vault_pibackup_admin_pass }}"
+#Proxy password
+host_proxy_pass: "{{ vault_pibackup_proxy_pass }}"

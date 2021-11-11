@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  vars_files: ./group_vars/vault
+  become: yes
+  gather_facts: no
+  roles:
+    - { role: preSetupServers, tags: initialupdate }
+  vars:
+    - { ansible_become_pass: "{{ host_admin_password }}"}
+    - { ansible_user: "{{ host_admin_user }}" }
+    - { ansible_password: "{{ host_admin_password }}" }
+    - { ansible_port: 22 }
+
+- hosts: all
+  vars_files: ./group_vars/vault
+  become: yes
+  gather_facts: yes
+  roles:
+    - { role: hardeningServers, tags: hardening }
+  vars:
+    - { ansible_become_pass: "{{ host_admin_password }}"}
+    - { ansible_user: "{{ host_admin_user }}" }
+    - { ansible_password: "{{ host_admin_password }}" }
+    - { ansible_port: 22 }
+    - { setUpservers_playbook: true }

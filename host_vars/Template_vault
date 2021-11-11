@@ -1,0 +1,6 @@
+vault_hostnames_ip: 
+vault_hostnames_user: 
+vault_hostnames_pass: 
+vault_hostnames_admin_user: 
+vault_hostnames_admin_pass: 
+vault_hostnames_proxy_pass:

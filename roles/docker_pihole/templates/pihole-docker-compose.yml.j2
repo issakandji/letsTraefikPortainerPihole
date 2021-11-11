@@ -1,0 +1,57 @@
+# Ansible managed
+---
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    hostname: 'pibackup'
+    networks:
+       - localdomain
+    #ports:
+    #  - "53:53/tcp"
+    #  - "53:53/udp"
+    #  - "67:67/udp"
+    #  - "8082:80/tcp"
+    environment:
+      TZ: '{{ pihole_timezone }}'
+      WEBPASSWORD: '{{ pihole_password }}'
+      ServerIP: '192.168.1.2'
+      PIHOLE_DNS_: '9.9.9.9;149.112.112.112'
+      PUID: '1000'
+      PGID: '1000'
+    labels:
+      traefik.enable: "true"
+      #traefik.docker.network: socket-proxy
+      traefik.http.routers.pihole-secure.rule: "Host(`host.domaine.name`)"
+      traefik.http.routers.pihole-secure.entrypoints: websecure
+      traefik.udp.routers.pihole-udp.entrypoints: udpdns
+
+      ### web interface
+      traefik.http.routers.pihole.rule: Host(`host.domaine.name`) 
+      traefik.http.routers.pihole.entrypoints: websecure
+      traefik.http.services.pihole.loadbalancer.server.port: 80 
+
+      ### DNS-over-TLS (853 Traefik -> 53 Pi-hole)
+      traefik.tcp.routers.dot.rule: HostSNI(`host.domaine.name`) 
+      traefik.tcp.routers.dot.entrypoints: dot
+      traefik.udp.services.pihole.loadbalancer.server.port: 53 
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "udp://192.168.0.65:514"
+
+networks:
+   localdomain:
+      external: true

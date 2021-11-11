@@ -1,0 +1,10 @@
+---
+# handlers file for roles/pi_hole
+- name: Restart internet-monitoring
+  community.docker.docker_compose:
+    project_src: /home/docker/pihole/internet-monitoring/
+    build: false
+    restarted: true
+
+- name: start rsync daemon
+  service: name=rsync state=started

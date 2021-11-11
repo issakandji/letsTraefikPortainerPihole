@@ -1,0 +1,15 @@
+---
+# handlers file for docker_install
+
+- name: restart docker daemon
+  service: name=docker state=restarted
+
+- name: start reverseproxy docker
+  docker_compose:
+    project_src: /home/docker/reverseproxy
+    recreate: always
+    restarted: yes
+    remove_orphans: yes
+  async: 120
+  poll: 10
+  when: not ansible_check_mode

@@ -1,0 +1,4 @@
+:msg,contains,"IPTables-Dropped: " /var/log/iptables.log
+:msg, startswith, "IPTables-Dropped: " -/var/log/iptables.log
+:msg, regex, "^\[ *[0-9]*\.[0-9]*\] IPTables-Dropped: " -/var/log/iptables.log
+& stop

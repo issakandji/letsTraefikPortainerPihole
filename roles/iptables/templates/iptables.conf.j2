@@ -1,0 +1,59 @@
+*filter
+# Interdire toute connexion entrante et sortante
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+:LOGGING - [0:0]
+## INPUT chain
+# Ne pas casser les connexions etablies
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+# Autoriser loopback
+-A INPUT -i lo -j ACCEPT
+# ICMP (Ping)
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+# SSH
+-A INPUT -p tcp -m tcp --dport {{ default_sshd_port }} -j ACCEPT
+# WEB
+-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9090 -j ACCEPT
+# DNS
+-A INPUT -p tcp -m tcp --dport 53 -j ACCEPT
+-A INPUT -p udp -m udp --dport 53 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 853 -j ACCEPT
+# DHCP
+-A INPUT -p udp -m udp --dport 68 -j ACCEPT
+# Log incoming traffic blocked by IPTables
+-A INPUT -j LOGGING
+## OUTPUT chain
+# Ne pas casser les connexions etablies
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+# Autoriser loopback
+-A OUTPUT -o lo -j ACCEPT
+# ICMP (Ping)
+-A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
+# SSH
+-A OUTPUT -p tcp -m tcp --dport {{ default_sshd_port }} -j ACCEPT
+# DNS
+-A OUTPUT -p tcp -m tcp --dport 53 -j ACCEPT
+-A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --dport 853 -j ACCEPT
+# WEB
+-A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT
+# NTP Out
+-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT
+# WhoIs
+-A OUTPUT -p tcp -m tcp --dport 43 -j ACCEPT
+# DHCP
+-A OUTPUT -p udp -m udp --dport 67 -j ACCEPT
+# NFS
+-A OUTPUT -p tcp -m tcp --dport 2049 -j ACCEPT
+# SYSLOG
+-A OUTPUT -p udp -m udp --dport 514 -j ACCEPT
+# Log outgoing traffic blocked by IPTables
+-A OUTPUT -j LOGGING
+## LOGGING chain
+-A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+-A LOGGING -j DROP
+COMMIT

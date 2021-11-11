@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  vars_files: ./group_vars/vault
+  become: yes
+  roles:
+  #- { role: hardeningServers, tags: hardening }
+  - { role: iptables }
+  vars:
+  - { no_fail2ban: true }
+  
+- hosts: dockerhosts
+  vars_files: ./group_vars/vault
+  gather_facts: no
+  become: yes
+  roles:
+  - { role: dockerServerInstall, tags: dockerserver }

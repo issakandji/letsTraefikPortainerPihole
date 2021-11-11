@@ -1,0 +1,6 @@
+---
+# Pi-hole configuration.
+pihole_enable: true
+pihole_hostname: pibackup
+pihole_timezone: 'France/Paris'
+pihole_password: "{{ host_proxy_pass }}"

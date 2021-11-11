@@ -1,0 +1,61 @@
+---
+# tasks file for roles/docker_pihole
+- name: Load configuration.
+  include_vars: localdomain.config.yml
+
+- name: Ensure Rsync for PI is present
+  ansible.builtin.apt:
+    name: rsync
+    state: present
+
+- name: Ensure Rsync deamon is running
+  service:
+    name: rsync
+    state: started
+
+# Install log2ram
+
+- name: Create pihole folder on Pi.
+  ansible.builtin.file:
+    path: /home/docker/pihole/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: docker_pihole
+
+- name: Copy pihole docker-compose template to Pi.
+  ansible.builtin.template:
+    src: pihole-docker-compose.yml.j2
+    dest: /home/docker/pihole/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0640'
+  tags: docker_pihole
+
+# Stop local dns
+#Best ntplan option
+- name: Copy stop resolver  script
+  copy:
+    src: reviewResolver.sh
+    dest: /home/docker/pihole
+    owner: root
+    group: root
+    mode: '0744'
+  tags: stopLocalResolver
+
+- name: Ensure localResolver is reveiwed
+  shell:  ./reviewResolver.sh >> reviewResolver.log
+  args:
+    chdir: /home/docker/pihole
+    creates: reviewResolver.log
+
+- name: state check for resolv.conf
+  stat: path=/etc/resolv.conf
+  register: resolv_stat
+
+#First Pull images if not arleady done
+- name: Ensure pihole is running.
+  community.docker.docker_compose:
+    project_src: /home/docker/pihole/
+    build: false

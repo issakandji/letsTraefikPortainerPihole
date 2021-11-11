@@ -1,0 +1,59 @@
+# traefik.yml.j2                                                                                                                                                                              
+[api]                                                                                                                                                                                         
+  debug = true                                                                                                                                                                                
+  dashboard = true                                                                                                                                                                            
+[entryPoints]                                                                                                                                                                                 
+  [entryPoints.web]                                                                                                                                                                           
+    address = ":80"                                                                                                                                                                           
+    [entryPoints.web.http]                                                                                                                                                                    
+      [entryPoints.web.http.redirections]                                                                                                                                                     
+        [entryPoints.web.http.redirections.entryPoint]                                                                                                                                        
+          to = "websecure"                                                                                                                                                                    
+          
+  [entryPoints.websecure]
+   address = ":443"
+   [entryPoints.websecure.http]
+     middlewares = "secureHeaders@file"
+     [entryPoints.websecure.http.tls]
+       options = "default"
+       certResolver = "letsencrypt"
+
+  [entryPoints.dot]
+   address = ":853"
+  
+  [entryPoints.udpdns]
+   address = ":53/udp"
+
+[providers]
+  [providers.docker]
+    endpoint = "tcp://socket-proxy:2375"
+    exposedByDefault = false
+  [providers.file]
+    directory = "/configurations/"
+
+[log]
+ level = "DEBUG"
+
+[traefikLog]
+  filePath = "/var/log/traefik/traefik.log"
+  format   = "json"
+
+[accessLog]
+  filePath = "/var/log/traefik/access.log"
+  format = "json"
+
+  [accessLog.filters]
+    statusCodes = ["200", "300-302"]
+    retryAttempts = true
+    minDuration = "10ms"
+
+
+[certificatesResolvers]
+  [certificatesResolvers.letsencrypt]
+    [certificatesResolvers.letsencrypt.acme]
+      email = "infos@kandji.info"
+      storage = "acme.json"
+      #caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
+      caserver = "https://acme-v02.api.letsencrypt.org/directory"
+      [certificatesResolvers.letsencrypt.acme.httpChallenge]
+        entryPoint = "web"

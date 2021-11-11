@@ -1,0 +1,30 @@
+# dynamic.yml.j2
+[http]
+  [http.middlewares]
+    [http.middlewares.secureHeaders.headers]
+      browserXssFilter = true
+      contentTypeNosniff = true
+      forceSTSHeader = true
+      stsIncludeSubdomains = true
+      stsPreload = true
+      stsSeconds = 15552000
+    [http.middlewares.user-auth.basicAuth]
+      users = ["{{ host_user }}:{{ host_proxy_pass | password_hash('md5_crypt', 65534 | random(seed=inventory_hostname) | string) }}"]
+
+
+[tls]
+  [tls.options]
+    [tls.options.default]
+      minVersion = "VersionTLS12"
+      sniStrict = true
+      cipherSuites = [
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+        "TLS_AES_256_GCM_SHA384",
+        "TLS_AES_128_GCM_SHA256",
+        "TLS_CHACHA20_POLY1305_SHA256",
+        "TLS_FALLBACK_SCSV" # Client is doing version fallback. See RFC 7507.
+    ]
