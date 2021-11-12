@@ -24,10 +24,11 @@ You might use these roles in following order
 # Playbooks:
 Using provided playbook in this order will do the trick
 - check_facts_playbook.yml
-- dockerServices_playbook.yml
+- updateServers_playbook.yml
 - installHardServers_playbook.yml
+- dockerServices_playbook.yml
 - piHole_playbook.yml
-- updateServers_playbook.yml 
+ 
 
 
 
