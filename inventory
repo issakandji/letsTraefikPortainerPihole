@@ -30,7 +30,6 @@ picam
 [centos:children]
 nificluster
 dockerhosts
-ansiblehosts
 odoocontainers
 
 [centos:vars]
