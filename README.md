@@ -62,10 +62,11 @@ Using provided playbooks in this order will do the trick
 - piHole_playbook.yml
 
 # To-Do:
-- [x] DNS Over TLS
-- [ ] DNS Over HTTPS
-- [ ] ???
+- [x] DoT
+- [ ] Test DoH
+- [ ] More docker service security related
+- [ ] Backup ? 
 
 
-@pihole/Thanks for making it possible
-@tecnativa/Thanks for making docker service more secure
+<p>@pihole/Thanks for making it possible<br>
+@tecnativa/Thanks for making docker service more secure<p>
