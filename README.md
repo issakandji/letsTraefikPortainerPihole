@@ -32,7 +32,7 @@ Flags:                           fp asimd evtstrm crc32 cpuid</p>
 DISTRIB_RELEASE=20.04<br>
 DISTRIB_CODENAME=focal<br>
 DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"<p>
-################################################################
+
 # Requiements:
 - Configure your ansible controller(I do recommend install using pip for future update):
 https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html
