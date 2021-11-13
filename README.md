@@ -2,36 +2,36 @@
 This roles aims to apply iptables rules, fail2ban filters and logs before deploying docker services and bootstrap ecure pihole behind a traefik-portainer-Letsencrypt stack.
 It has been successfully run on the following architecture and OS:
 ############################################################
-Architecture:                    aarch64
-CPU op-mode(s):                  32-bit, 64-bit
-Byte Order:                      Little Endian
-CPU(s):                          4
-On-line CPU(s) list:             0-3
-Thread(s) per core:              1
-Core(s) per socket:              4
-Socket(s):                       1
-Vendor ID:                       ARM
-Model:                           3
-Model name:                      Cortex-A72
-Stepping:                        r0p3
-CPU max MHz:                     1500.0000
-CPU min MHz:                     600.0000
-BogoMIPS:                        108.00
-Vulnerability Itlb multihit:     Not affected
-Vulnerability L1tf:              Not affected
-Vulnerability Mds:               Not affected
-Vulnerability Meltdown:          Not affected
-Vulnerability Spec store bypass: Vulnerable
-Vulnerability Spectre v1:        Mitigation; __user pointer sanitization
-Vulnerability Spectre v2:        Vulnerable
-Vulnerability Srbds:             Not affected
-Vulnerability Tsx async abort:   Not affected
-Flags:                           fp asimd evtstrm crc32 cpuid
+<p>Architecture:                    aarch64<br>
+CPU op-mode(s):                  32-bit, 64-bit<br>
+Byte Order:                      Little Endian<br>
+CPU(s):                          4<br>
+On-line CPU(s) list:             0-3<br>
+Thread(s) per core:              1<br>
+Core(s) per socket:              4<br>
+Socket(s):                       1<br>
+Vendor ID:                       ARM<br>
+Model:                           3<br>
+Model name:                      Cortex-A72<br>
+Stepping:                        r0p3<br>
+CPU max MHz:                     1500.0000<br>
+CPU min MHz:                     600.0000<br>
+BogoMIPS:                        108.00<br>
+Vulnerability Itlb multihit:     Not affected<br>
+Vulnerability L1tf:              Not affected<br>
+Vulnerability Mds:               Not affected<br>
+Vulnerability Meltdown:          Not affected<br>
+Vulnerability Spec store bypass: Vulnerable<br>
+Vulnerability Spectre v1:        Mitigation; __user pointer sanitization<br>
+Vulnerability Spectre v2:        Vulnerable<br>
+Vulnerability Srbds:             Not affected<br>
+Vulnerability Tsx async abort:   Not affected<br>
+Flags:                           fp asimd evtstrm crc32 cpuid</p>
 ###############################################################
-ISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=20.04
-DISTRIB_CODENAME=focal
-DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"
+<p>ISTRIB_ID=Ubuntu<br>
+DISTRIB_RELEASE=20.04<br>
+DISTRIB_CODENAME=focal<br>
+DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"<p>
 ################################################################
 # Requiements:
 - Configure your ansible controller(I do recommend install using pip for future update):
@@ -60,3 +60,12 @@ Using provided playbooks in this order will do the trick
 - installHardServers_playbook.yml
 - dockerServices_playbook.yml
 - piHole_playbook.yml
+
+# To-Do:
+- [x] DNS Over TLS
+- [ ] DNS Over HTTPS
+- [ ] ???
+
+
+@pihole/Thanks for making it possible
+@tecnativa/Thanks for making docker service more secure
