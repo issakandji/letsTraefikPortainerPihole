@@ -1,5 +1,36 @@
 # letsTraefikPortainerPihole
-Ansible roles to bootstrap secure pihole behind a traefik-portainer-Letsencrypt stack.
+This roles aims to apply iptables rules, fail2ban filters and logs before deploying docker services and bootstrap ecure pihole behind a traefik-portainer-Letsencrypt stack.
+It has been successfully run on the following architecture and OS:
+Architecture:                    aarch64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+CPU(s):                          4
+On-line CPU(s) list:             0-3
+Thread(s) per core:              1
+Core(s) per socket:              4
+Socket(s):                       1
+Vendor ID:                       ARM
+Model:                           3
+Model name:                      Cortex-A72
+Stepping:                        r0p3
+CPU max MHz:                     1500.0000
+CPU min MHz:                     600.0000
+BogoMIPS:                        108.00
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Not affected
+Vulnerability Meltdown:          Not affected
+Vulnerability Spec store bypass: Vulnerable
+Vulnerability Spectre v1:        Mitigation; __user pointer sanitization
+Vulnerability Spectre v2:        Vulnerable
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Not affected
+Flags:                           fp asimd evtstrm crc32 cpuid
+###############################################################
+ISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"
 
 # Requiements:
 - Configure your ansible controller(I do recommend install using pip for future update):
