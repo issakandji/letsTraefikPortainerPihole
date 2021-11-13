@@ -1,6 +1,7 @@
 # letsTraefikPortainerPihole
 This roles aims to apply iptables rules, fail2ban filters and logs before deploying docker services and bootstrap ecure pihole behind a traefik-portainer-Letsencrypt stack.
 It has been successfully run on the following architecture and OS:
+############################################################
 Architecture:                    aarch64
 CPU op-mode(s):                  32-bit, 64-bit
 Byte Order:                      Little Endian
@@ -31,7 +32,7 @@ ISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=20.04
 DISTRIB_CODENAME=focal
 DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"
-
+################################################################
 # Requiements:
 - Configure your ansible controller(I do recommend install using pip for future update):
 https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html
