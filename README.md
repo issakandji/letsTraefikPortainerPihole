@@ -50,7 +50,7 @@ You might use these roles in the following order
 - preSetupServers --> Will install some tools and dependancies on the managed host (customize it depending your needs)
 - hardeningServers --> will apply hardening process
 - iptables --> will setup traffic filter. Also reveiw it depending you needs
-- dockerServerInstall --> Will install docker-ce services on the managed host. Popup traefik-portainer container and link secure access to Letsencrypt
+- dockerServerInstall --> Will install docker-ce services on the managed host. Setup docker-proxy 4 secure daemon and popup traefik-portainer container and link secure access to Letsencrypt
 - docker_pihole --> will popup a pihole container
 
 # Playbooks:
