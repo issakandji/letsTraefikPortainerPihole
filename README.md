@@ -68,6 +68,6 @@ Using provided playbooks in this order will do the trick
 - [ ] Backup ? 
 
 
-<p>@docker-ce/Thanks. 
+<p>@docker-ce/Thanks.<br>
 @pihole/Thanks for making it possible.<br>
 @tecnativa/Thanks for making docker service more secure.<p>
