@@ -1,7 +1,7 @@
 # letsTraefikPortainerPihole
-This roles aims to apply iptables rules, fail2ban filters and logs before deploying docker services and bootstrap ecure pihole behind a traefik-portainer-Letsencrypt stack.
-It has been successfully run on the following architecture and OS:
-############################################################
+<p>This roles aims to apply iptables rules, fail2ban filters and logs before deploying docker services and bootstrap ecure pihole behind a traefik-portainer-Letsencrypt stack.
+It has been successfully run on the following architecture and OS:<br>
+############################################################<p>
 <p>Architecture:                    aarch64<br>
 CPU op-mode(s):                  32-bit, 64-bit<br>
 Byte Order:                      Little Endian<br>
